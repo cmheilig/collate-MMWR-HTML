@@ -1,4 +1,4 @@
-# collate-MMWR-HTML
+# Collate _MMWR_ HTML
 Code to extract and collate HTML of 56 full reports selected for review.
 
 This repository contains Python code and auxiliary assets to do the following: 
