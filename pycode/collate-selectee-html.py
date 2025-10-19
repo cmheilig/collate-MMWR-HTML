@@ -18,9 +18,14 @@ from collections import Counter
 from copy import copy
 
 json_zip_path = (
-    'https://github.com/cmheilig/harvest-cdc-journals/blob/main/json-outputs/html/mmwr_art_en_html_json.zip')
+    '/Users/cmheilig/cdc-corpora/GitHub_20251016/'
+    'harvest-cdc-journals/json-outputs/html/mmwr_art_en_html_json.zip')
+json_zip_path = (
+    '/Users/cmheilig/cdc-corpora/GitHub_20240320/'
+    'harvest-cdc-journals/json-outputs/html/mmwr_art_en_html_json.zip')
 selectee_construction_folder = (
-    'https://github.com/cmheilig/collate-MMWR-HTML/tree/main/html/')
+    '/Users/cmheilig/Documents/professional/chad-essays-on-data/bookdown/'
+    'data-in-mmwr/mmwr-selectees/')
 
 #%% Parse JSON and subset to 56 selectees
 
@@ -143,10 +148,10 @@ def extract_report(rep_id):
             aTag['title'] +=  f'_{rep_id}'
     # <img src=: modify img:src elements
     for aTag in soup_x.find_all(name='img'):
-            # change relative gif href to local reference
+            # change relative gif and jpg hrefs to local reference
             if rep_id in aTag['src']:
                 aTag['src'] = re.sub(
-                    rf'/mmwr/.*?/({rep_id}.*?\.gif).*', r'gifs/\1', aTag['src'])
+                    rf'/mmwr/.*?/({rep_id}.*?\.(gif|jpg)).*', r'\2s/\1', aTag['src'])
             # change other relative image source values to absolute URL
             elif aTag['src'].startswith('/mmwr/volumes'):
                 aTag['src'] = 'https://www.cdc.gov' + aTag['href']
@@ -163,9 +168,14 @@ def extract_report(rep_id):
     # <h1: modify h1 element
     assert len(soup_x.find_all(name='h1')) == 1
     # put report identifier in h1 title and insert report-specific anchor
-    soup_x.find(name='h1').string += f' [{rep_id}]'
-    soup_x.find(name='h1').insert(0,
-        BeautifulSoup(f'<a id="_{rep_id}"></a>', 'lxml').find('a'))
+    h1_tag = soup_x.find(name='h1')
+    h1_tag.insert(0, BeautifulSoup(f'<a id="_{rep_id}"></a>', 'lxml').find('a'))
+    # h1_tag.string += f' [{rep_id}]'
+    # h1_tag.append(
+    #     BeautifulSoup(f'<a href="https://doi.org/10.15585/mmwr.{rep_id}" target="_blank">[{rep_id}]</a>', 'lxml').find('a'))
+    h1_tag.extend([' [', BeautifulSoup('<a href="https://doi.org/10.15585/mmwr.'
+        f'{rep_id}" target="_blank">{rep_id}</a>', 'lxml').find('a'), ']'])
+    
     # insert class="clear" to force opening paragraph not to wrap previous element
     first_para = soup_x.find(string='Related Materials').find_next('div', class_='w-100')
     first_para['class'] += ['clear']
