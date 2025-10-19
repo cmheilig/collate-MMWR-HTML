@@ -18,14 +18,7 @@ from collections import Counter
 from copy import copy
 
 json_zip_path = (
-    '/Users/cmheilig/cdc-corpora/GitHub_20251016/'
-    'harvest-cdc-journals/json-outputs/html/mmwr_art_en_html_json.zip')
-json_zip_path = (
-    '/Users/cmheilig/cdc-corpora/GitHub_20240320/'
-    'harvest-cdc-journals/json-outputs/html/mmwr_art_en_html_json.zip')
 selectee_construction_folder = (
-    '/Users/cmheilig/Documents/professional/chad-essays-on-data/bookdown/'
-    'data-in-mmwr/mmwr-selectees/')
 
 #%% Parse JSON and subset to 56 selectees
 
