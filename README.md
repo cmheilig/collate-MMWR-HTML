@@ -1,8 +1,8 @@
-# collate-MMWR-HTML
+# Collate _MMWR_ HTML
 Code to extract and collate HTML of 56 full reports selected for review.
 
 This repository contains Python code and auxiliary assets to do the following: 
-1. Extract MMWR HTML from a zipped JSON object, [mmwr_art_en_html_json.zip](https://github.com/cmheilig/harvest-cdc-journals/blob/main/json-outputs/html/mmwr_art_en_html_json.zip), that contains HTML for approximately 13,000 [_MMWR_ weekly reports online](https://www.cdc.gov/mmwr/). See the [full _CDC text corpora for learners_ repository](https://github.com/cmheilig/harvest-cdc-journals) for further details.
+1. Extract _MMWR_ HTML from a zipped JSON object, [mmwr_art_en_html_json.zip](https://github.com/cmheilig/harvest-cdc-journals/blob/main/json-outputs/html/mmwr_art_en_html_json.zip), that contains HTML for approximately 13,000 [_MMWR_ weekly reports online](https://www.cdc.gov/mmwr/). See the [full _CDC text corpora for learners_ repository](https://github.com/cmheilig/harvest-cdc-journals) for further details.
 2. Extract HTML for the 56 selected full reports.
 3. Extract and trim core HTML for each report by removing unneeded segments and inserting anchors to aid with on-page navigation.
 4. Collate trimmed, revised core HTML—along with a preconstructed header, table of contents, and tail—into a single HTML file.
